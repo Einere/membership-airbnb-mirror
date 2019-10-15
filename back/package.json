@@ -7,7 +7,9 @@
   "license": "MIT",
   "dependencies": {
     "graphql-yoga": "^1.18.3",
-    "nodemon": "^1.19.3"
+    "nodemon": "^1.19.3",
+    "sequelize": "^5.19.6",
+    "sequelize-cli": "^5.5.1"
   },
   "scripts": {
     "start": "nodemon --exec babel-node index.js"
