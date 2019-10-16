@@ -16,7 +16,7 @@ const sequelize = new Sequelize(process.env.DB_DATABASE, process.env.DB_USER, pr
     },
     // if table is already exist, drop the table...
     sync: {
-        force: true
+        force: false
     }
 });
 
@@ -25,16 +25,17 @@ sequelize.authenticate()
     .catch((e) => console.error(e));
 
 const db = {
+    Sequelize,
     User: userModel(sequelize, DataTypes),
     Room: roomModel(sequelize, DataTypes),
     Reservation: reservationModel(sequelize, DataTypes)
 };
 
-// db.User.hasMany(db.Room);
+db.User.hasMany(db.Room);
 db.Room.belongsTo(db.User, {foreignKey: 'host'});
-// db.Room.hasMany(db.Reservation);
+db.Room.hasMany(db.Reservation);
 db.Reservation.belongsTo(db.Room, {foreignKey: 'roomId'});
-// db.User.hasMany(db.Reservation);
+db.User.hasMany(db.Reservation);
 db.Reservation.belongsTo(db.User, {foreignKey: 'guest'});
 
 sequelize.sync();
