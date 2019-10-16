@@ -1,0 +1,32 @@
+[
+  {
+    "image": null,
+    "type": 1,
+    "title": "title1",
+    "location": "location1",
+    "price": 100000,
+    "capacity": 1,
+    "showerRoom": 1,
+    "options": 1
+  },
+  {
+    "image": null,
+    "type": 2,
+    "title": "title2",
+    "location": "location2",
+    "price": 200000,
+    "capacity": 2,
+    "showerRoom": 2,
+    "options": 2
+  },
+  {
+    "image": null,
+    "type": 3,
+    "title": "title3",
+    "location": "location3",
+    "price": 300000,
+    "capacity": 3,
+    "showerRoom": 3,
+    "options": 4
+  }
+]
