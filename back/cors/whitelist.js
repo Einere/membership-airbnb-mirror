@@ -1,5 +1,5 @@
 const whitelist = [
-    'http://localhost:8080',
+    'http://localhost:4000',
 ];
 
 export {whitelist};
