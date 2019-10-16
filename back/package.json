@@ -6,6 +6,7 @@
   "author": "Einere",
   "license": "MIT",
   "dependencies": {
+    "cors": "^2.8.5",
     "dotenv": "^8.1.0",
     "graphql-yoga": "^1.18.3",
     "mysql2": "^1.7.0",
@@ -20,6 +21,7 @@
     "babel-cli": "^6.26.0",
     "babel-node": "^0.0.1-security",
     "babel-preset-env": "^1.7.0",
-    "babel-preset-stage-3": "^6.24.1"
+    "babel-preset-stage-3": "^6.24.1",
+    "morgan": "^1.9.1"
   }
 }
