@@ -1,8 +1,8 @@
 require('dotenv').config();
 import {DataTypes, Sequelize} from 'sequelize';
-import {userModel} from "./model/userModel";
-import {roomModel} from "./model/roomModel";
-import {reservationModel} from "./model/reservationModel";
+import {userModel} from "./models/userModel";
+import {roomModel} from "./models/roomModel";
+import {reservationModel} from "./models/reservationModel";
 
 const sequelize = new Sequelize(process.env.DB_DATABASE, process.env.DB_USER, process.env.DB_USER_PASSWORD, {
     dialect: 'mysql',
@@ -13,6 +13,10 @@ const sequelize = new Sequelize(process.env.DB_DATABASE, process.env.DB_USER, pr
         min: 0,
         acquire: 30000,
         idle: 10000
+    },
+    // if table is already exist, drop the table...
+    sync: {
+        force: true
     }
 });
 
@@ -25,5 +29,14 @@ const db = {
     Room: roomModel(sequelize, DataTypes),
     Reservation: reservationModel(sequelize, DataTypes)
 };
+
+// db.User.hasMany(db.Room);
+db.Room.belongsTo(db.User, {foreignKey: 'host'});
+// db.Room.hasMany(db.Reservation);
+db.Reservation.belongsTo(db.Room, {foreignKey: 'roomId'});
+// db.User.hasMany(db.Reservation);
+db.Reservation.belongsTo(db.User, {foreignKey: 'guest'});
+
+sequelize.sync();
 
 export {db};
