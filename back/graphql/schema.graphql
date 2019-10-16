@@ -1,17 +1,52 @@
-type Person {
+scalar DateTime
+scalar Date
+
+type User {
     id: Int!,
     name: String!,
-    age: Int!,
-    gender: String!
+    password: String!
+}
+
+type Room {
+    id: Int!,
+    image: String,
+    type: Int!,
+    title: String!,
+    location: String!,
+    price: Int!,
+    capacity: Int!,
+    showerRoom: Int!,
+    options: Int!,
+    host: Int!
+}
+
+type Reservation {
+    id: Int!,
+    checkIn: DateTime!,
+    checkOut: DateTime!,
+    guest: Int!,
+    roomId: Int!
 }
 
 type Query {
-    people: [Person]!,
-    person(id: Int!, age: Int): Person
+    getUsers: [User],
+    getUserById(id: Int!): User,
+    getRooms: [Room],
+    getRoomById(id: Int!): Room,
+    getReservations: [Reservation],
+    getReservationById(id: Int!): Reservation,
+    getAvailableRoomsByDays(in: DateTime!, out: DateTime!): [Room],
+    #    getAvailableRoomsByCapacity(capacity: Int!): [Room],
+    #    getAvailableRoomsByPrice(price: Int!): [Room]
 }
 
 type Mutation {
-    addPerson(name:String!, age:Int!, gender:String!): Person!,
-    updatePersonNameById(id:Int!, name:String!): Person,
-    deletePersonById(id:Int!): Person,
+    # create
+    createUser(name:String!, password:String!): User,
+    createRoom(image:String, type:Int!, title:String!, location:String!, price:Int!, capacity:Int!, showerRoom:Int!, options:Int!, host:Int!): Room
+    createReservation(checkIn: DateTime, checkOut:DateTime, guest:Int!, roomId:Int!): Reservation
+    # delete
+    deleteUser(id:Int!): Int,
+    deleteRoom(id:Int!): Int,
+    deleteReservation(id:Int!): Int
 }

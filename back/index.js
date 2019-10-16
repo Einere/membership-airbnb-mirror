@@ -24,6 +24,6 @@ server.express.use(cors({
     credentials: true,
 }));
 
-server.start(() => {
+server.start(async () => {
     console.log('graphQL server is running!');
 });
