@@ -36,9 +36,7 @@ const resolvers = {
                 return db.Room.findAll({
                     include: [{model: db.Reservation}],
                     where: {
-                        id: {
-                            [notIn]: rows.map(row => row.id)
-                        }
+                        id: {[notIn]: rows.map(row => row.id)}
                     }
                 });
             },
@@ -47,7 +45,11 @@ const resolvers = {
                     capacity: {[gte]: capacity}
                 }
             }),
-
+            getAvailableRoomsByPrice: (_, {price}) => db.Room.findAll({
+                where: {
+                    price: {[lte]: price}
+                }
+            })
         },
         Mutation: {
             createUser: (_, {name, password}) => db.User.create({
