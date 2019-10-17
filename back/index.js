@@ -47,8 +47,14 @@ server.express.get('/', function (req, res) {
 });
 
 server.express.get('/test', function (req, res) {
-    if (req.isAuthenticated()) res.send(true);
-    else res.send(false);
+    if (req.isAuthenticated()) {
+        const decoded = jwt.verify(req.user.token, process.env.JWT_SECRET, {
+            issuer: 'einere'
+        });
+        if (decoded) res.status(200).send(true);
+        else res.status(403).send(false);
+
+    } else res.status(401).send(false);
 });
 
 server.express.get('/auth/facebook', passport.authenticate('facebookLogin'));
@@ -70,7 +76,7 @@ server.express.get('/login_success', ensureAuthenticated, function (req, res) {
             issuer: 'einere',
             subject: 'userInfo'
         });
-
+    req.user.token = token;
     res.send(token);
 });
 server.express.get('/login_fail', ensureAuthenticated, function (req, res) {
