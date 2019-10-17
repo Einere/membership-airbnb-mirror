@@ -41,7 +41,13 @@ const resolvers = {
                         }
                     }
                 });
-            }
+            },
+            getAvailableRoomsByCapacity: (_, {capacity}) => db.Room.findAll({
+                where: {
+                    capacity: {[gte]: capacity}
+                }
+            }),
+
         },
         Mutation: {
             createUser: (_, {name, password}) => db.User.create({
