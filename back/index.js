@@ -1,14 +1,21 @@
-import {express, GraphQLServer} from 'graphql-yoga';
+import {GraphQLServer} from 'graphql-yoga';
 import {resolvers} from './graphql/resolvers';
+import path from 'path';
 // cors
 import {whitelist} from './cors/whitelist';
 import cors from 'cors';
+// session
+import session from 'express-session';
+// passport
+import passport from './middleware/passport-facebook';
 
 const server = new GraphQLServer({
     typeDefs: "./graphql/schema.graphql",
     resolvers,
     options: {
-        static: 'public'
+        static: 'public',
+        endpoint: '/',
+        playground: '/playground',
     }
 });
 
@@ -24,6 +31,44 @@ server.express.use(cors({
     credentials: true,
 }));
 
-server.start(async () => {
+// session
+server.express.use(session({secret: 'keyboard cat', resave: true, saveUninitialized: true}));
+
+// passport
+server.express.use(passport.initialize());
+server.express.use(passport.session());
+
+// routing
+server.express.get('/', function (req, res) {
+    res.sendFile(path.resolve(__dirname, 'public', 'index.html'));
+});
+
+server.express.get('/auth/facebook', passport.authenticate('facebookLogin'));
+
+server.express.get('/auth/facebook/callback',
+    passport.authenticate('facebookLogin', {
+        successRedirect: '/login_success',
+        failureRedirect: '/login_fail'
+    }));
+
+server.express.get('/login_success', ensureAuthenticated, function (req, res) {
+    res.send(req.user);
+});
+
+server.express.get('/logout', function (req, res) {
+    req.logout();
+    res.redirect('/');
+});
+
+function ensureAuthenticated(req, res, next) {
+    // 로그인이 되어 있으면, 다음 파이프라인으로 진행
+    if (req.isAuthenticated()) {
+        return next();
+    }
+    // 로그인이 안되어 있으면, login 페이지로 진행
+    res.redirect('/');
+}
+
+server.start(() => {
     console.log('graphQL server is running!');
 });
