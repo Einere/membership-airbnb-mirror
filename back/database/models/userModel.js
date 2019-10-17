@@ -1,10 +1,10 @@
 function userModel(sequelize, DataTypes) {
     return sequelize.define('User', {
-        name: {
+        facebookId: {
             type: DataTypes.STRING,
             allowNull: false,
         },
-        password: {
+        displayName: {
             type: DataTypes.STRING,
             allowNull: false,
         }

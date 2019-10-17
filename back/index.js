@@ -1,6 +1,8 @@
 import {GraphQLServer} from 'graphql-yoga';
 import {resolvers} from './graphql/resolvers';
 import path from 'path';
+// db
+import {db} from './database/index';
 // cors
 import {whitelist} from './cors/whitelist';
 import cors from 'cors';
@@ -64,6 +66,10 @@ server.express.get('/login_success', ensureAuthenticated, function (req, res) {
             issuer: 'einere',
             subject: 'userInfo'
         });
+    db.User.create({
+        facebookId: req.user.id,
+        displayName: req.user.displayName
+    });
 
     res.send(token);
 });

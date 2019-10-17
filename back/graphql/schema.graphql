@@ -42,7 +42,7 @@ type Query {
 
 type Mutation {
     # create
-    createUser(name:String!, password:String!): User,
+    createUser(facebookId:String!, displayName:String!): User,
     createRoom(image:String, type:Int!, title:String!, location:String!, price:Int!, capacity:Int!, showerRoom:Int!, options:Int!, host:Int!): Room
     createReservation(checkIn: DateTime, checkOut:DateTime, guest:Int!, roomId:Int!): Reservation
     # delete

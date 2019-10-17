@@ -52,9 +52,9 @@ const resolvers = {
             })
         },
         Mutation: {
-            createUser: (_, {name, password}) => db.User.create({
-                name,
-                password
+            createUser: (_, {facebookId, displayName}) => db.User.create({
+                facebookId,
+                displayName
             }),
             createRoom: (_, {image, type, title, location, price, capacity, showerRoom, options, host}) => db.Room.create({
                 image,
