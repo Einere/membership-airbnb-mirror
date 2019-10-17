@@ -3,6 +3,7 @@ function userModel(sequelize, DataTypes) {
         facebookId: {
             type: DataTypes.STRING,
             allowNull: false,
+            unique: true
         },
         displayName: {
             type: DataTypes.STRING,
