@@ -21,8 +21,16 @@ passport.use(
             clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
             callbackURL: "http://localhost:4000/auth/facebook/callback",
         },
-        function (accessToken, refreshToken, profile, cb) {
-            // db에서 검증하는 과정이 필요하다.
+        async function (accessToken, refreshToken, profile, cb) {
+            const result = await db.User.findOrCreate({
+                where: {
+                    facebookId: profile.id
+                },
+                defaults: {
+                    facebookId: profile.id,
+                    displayName: profile.displayName
+                }
+            });
             return cb(null, profile);
         }
     ),

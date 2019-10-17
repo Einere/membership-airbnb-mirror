@@ -2,7 +2,6 @@ import {GraphQLServer} from 'graphql-yoga';
 import {resolvers} from './graphql/resolvers';
 import path from 'path';
 // db
-import {db} from './database/index';
 // cors
 import {whitelist} from './cors/whitelist';
 import cors from 'cors';
@@ -47,6 +46,11 @@ server.express.get('/', function (req, res) {
     res.sendFile(path.resolve(__dirname, 'public', 'index.html'));
 });
 
+server.express.get('/test', function (req, res) {
+    if (req.isAuthenticated()) res.send(true);
+    else res.send(false);
+});
+
 server.express.get('/auth/facebook', passport.authenticate('facebookLogin'));
 
 server.express.get('/auth/facebook/callback',
@@ -66,10 +70,6 @@ server.express.get('/login_success', ensureAuthenticated, function (req, res) {
             issuer: 'einere',
             subject: 'userInfo'
         });
-    db.User.create({
-        facebookId: req.user.id,
-        displayName: req.user.displayName
-    });
 
     res.send(token);
 });
