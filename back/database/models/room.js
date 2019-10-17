@@ -33,7 +33,11 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.INTEGER,
             allowNull: true,
         },
-    }, {});
+    }, {
+        timestamps: false,
+        createdAt: false,
+        updatedAt: false
+    });
     Room.associate = function (models) {
         // associations can be defined here
     };

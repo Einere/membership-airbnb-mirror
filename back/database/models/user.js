@@ -9,7 +9,11 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING,
             allowNull: false,
         }
-    }, {});
+    }, {
+        timestamps: false,
+        createdAt: false,
+        updatedAt: false
+    });
     User.associate = function (models) {
         // associations can be defined here
     };

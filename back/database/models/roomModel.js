@@ -32,16 +32,10 @@ function roomModel(sequelize, DataTypes) {
             type: DataTypes.INTEGER,
             allowNull: true,
         },
-        createdAt: {
-            allowNull: false,
-            type: DataTypes.DATE,
-            default: Date.now()
-        },
-        updatedAt: {
-            allowNull: false,
-            type: DataTypes.DATE,
-            default: Date.now()
-        }
+    }, {
+        timestamps: false,
+        createdAt: false,
+        updatedAt: false
     });
 }
 

@@ -7,17 +7,11 @@ function userModel(sequelize, DataTypes) {
         password: {
             type: DataTypes.STRING,
             allowNull: false,
-        },
-        createdAt: {
-            allowNull: false,
-            type: DataTypes.DATE,
-            default: Date.now()
-        },
-        updatedAt: {
-            allowNull: false,
-            type: DataTypes.DATE,
-            default: Date.now()
         }
+    }, {
+        timestamps: false,
+        createdAt: false,
+        updatedAt: false
     });
 }
 

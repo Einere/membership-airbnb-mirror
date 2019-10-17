@@ -1,11 +1,11 @@
 function reservationModel(sequelize, DataTypes) {
     return sequelize.define('Reservation', {
         checkIn: {
-            type: DataTypes.DATE,
+            type: DataTypes.DATEONLY,
             allowNull: false,
         },
         checkOut: {
-            type: DataTypes.DATE,
+            type: DataTypes.DATEONLY,
             allowNull: false,
         },
         createdAt: {
