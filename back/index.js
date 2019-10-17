@@ -8,6 +8,8 @@ import cors from 'cors';
 import session from 'express-session';
 // passport
 import passport from './middleware/passport-facebook';
+// auth
+import jwt from 'jsonwebtoken';
 
 const server = new GraphQLServer({
     typeDefs: "./graphql/schema.graphql",
@@ -52,7 +54,21 @@ server.express.get('/auth/facebook/callback',
     }));
 
 server.express.get('/login_success', ensureAuthenticated, function (req, res) {
-    res.send(req.user);
+    const token = jwt.sign({
+            id: req.user.id,
+            displayName: req.user.displayName
+        },
+        process.env.JWT_SECRET,
+        {
+            expiresIn: '1h',
+            issuer: 'einere',
+            subject: 'userInfo'
+        });
+
+    res.send(token);
+});
+server.express.get('/login_fail', ensureAuthenticated, function (req, res) {
+    res.redirect('/');
 });
 
 server.express.get('/logout', function (req, res) {
