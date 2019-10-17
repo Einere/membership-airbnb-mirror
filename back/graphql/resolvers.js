@@ -1,5 +1,6 @@
 import {db} from "../database/index";
-// const {gte, lte, ne, in: opIn, notIn} = db.Sequelize.Op;
+
+const {gte, lte, ne, in: opIn, notIn, and, or} = db.Sequelize.Op;
 
 const resolvers = {
         Query: {
@@ -9,31 +10,35 @@ const resolvers = {
             getRoomById: (_, {id}) => db.Room.findByPk(id),
             getReservations: () => db.Reservation.findAll(),
             getReservationById: (_, {id}) => db.Reservation.findByPk(id),
-            getAvailableRoomsByDays: (_, {checkIn, checkOut}) => {
-                /*return db.Room.findAll({
+            getAvailableRoomsByDays: async (_, {checkIn, checkOut}) => {
+                const checkInDate = new Date(checkIn);
+                const checkOutDate = new Date(checkOut);
+                const rows = await db.Reservation.findAll({
+                    attributes: ['id'],
+                    where: {
+                        [and]: [
+                            {
+                                [or]: [
+                                    {checkin: {[lte]: checkInDate}},
+                                    {checkin: {[lte]: checkOutDate}}
+                                ]
+                            },
+                            {
+                                [or]: [
+                                    {checkOut: {[gte]: checkInDate}},
+                                    {checkOut: {[gte]: checkOutDate}}
+                                ]
+                            }
+                        ]
+                    }
+                });
+
+                return db.Room.findAll({
                     include: [{model: db.Reservation}],
                     where: {
                         id: {
-                            notIn: db.Reservation.findAll({
-                                attributes: ['id'],
-                                where: {
-                                    and: [
-                                        {checkIn: {lte: checkIn}},
-                                        {checkOut: {gte: checkOut}}
-                                    ]
-                                }
-                            })
+                            [notIn]: rows.map(row => row.id)
                         }
-                    }
-                });*/
-                console.log('debug', checkIn, checkOut);
-                return db.Reservation.findAll({
-                    attributes: ['id'],
-                    where: {
-                        and: [
-                            {checkIn: {lte: checkIn}},
-                            {checkOut: {gte: checkOut}}
-                        ]
                     }
                 });
             }
