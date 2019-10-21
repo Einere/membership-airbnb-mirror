@@ -3,12 +3,12 @@ const FacebookStrategy = require('passport-facebook').Strategy;
 const {db} = require('../database/index');
 
 passport.serializeUser((user, done) => {
-    console.log('serializeUser', user);
+    console.log('serializeUser');
     done(null, user);
 });
 
 passport.deserializeUser((user, done) => {
-    console.log('deserializeUser', user);
+    console.log('deserializeUser');
     done(null, user);
 });
 

@@ -4,13 +4,13 @@ import path from 'path';
 // db
 // cors
 import {whitelist} from './cors/whitelist';
-import cors from 'cors';
 // session
 import session from 'express-session';
 // passport
 import passport from './middleware/passport-facebook';
 // auth
 import jwt from 'jsonwebtoken';
+import authenticate from "./middleware/authenticate";
 
 const server = new GraphQLServer({
     typeDefs: "./graphql/schema.graphql",
@@ -46,16 +46,7 @@ server.express.get('/', function (req, res) {
     res.sendFile(path.resolve(__dirname, 'public', 'index.html'));
 });
 
-server.express.get('/test', function (req, res) {
-    if (req.isAuthenticated()) {
-        const decoded = jwt.verify(req.user.token, process.env.JWT_SECRET, {
-            issuer: 'einere'
-        });
-        if (decoded) res.status(200).send(true);
-        else res.status(403).send(false);
-
-    } else res.status(401).send(false);
-});
+server.express.get('/test', authenticate);
 
 server.express.get('/auth/facebook', passport.authenticate('facebookLogin'));
 
