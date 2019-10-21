@@ -17,22 +17,8 @@ const server = new GraphQLServer({
     resolvers,
     options: {
         static: 'public',
-        endpoint: '/',
-        playground: '/playground',
     }
 });
-
-// cors
-server.express.use(cors({
-    origin: function (origin, callback) {
-        callback(whitelist.indexOf(origin) > -1 || !origin ? null : new Error('Not allowed by CORS'), true);
-        // 만약 서버 - 서버 api로 사용하고 싶으면 아래와 같이 코딩한다
-        // 참고 : https://expressjs.com/en/resources/middleware/cors.html
-        // callback(whitelist.indexOf(origin) > -1 || !origin ? null : new Error('Not allowed by CORS'), true);
-    },
-    methods: "GET, POST, PATCH, DELETE",
-    credentials: true,
-}));
 
 // session
 server.express.use(session({secret: 'keyboard cat', resave: true, saveUninitialized: true}));
@@ -88,6 +74,14 @@ function ensureAuthenticated(req, res, next) {
     res.redirect('/');
 }
 
-server.start(() => {
+server.start({
+    playground: '/playground',
+    endpoint: '/',
+    cors: {
+        credentials: true,
+        origin: whitelist,
+        methods: "GET, POST, PATCH, DELETE",
+    }
+}, () => {
     console.log('graphQL server is running!');
 });
