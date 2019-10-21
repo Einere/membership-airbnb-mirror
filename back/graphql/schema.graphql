@@ -3,8 +3,8 @@ scalar Date
 
 type User {
     id: Int!,
-    name: String!,
-    password: String!
+    facebookId: String!,
+    displayName: String!
 }
 
 type Room {
