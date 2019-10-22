@@ -1,6 +1,6 @@
 import React from 'react';
 import FilterButton from "./FilterButton";
-import FilterBarStyle from '../stylesheet/FilterBar.css';
+import '../stylesheet/FilterBar.css';
 
 function FilterBar() {
     return (

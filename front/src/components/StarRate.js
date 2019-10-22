@@ -1,5 +1,5 @@
 import React from 'react';
-import StarRateStyle from '../stylesheet/StarRate.css';
+import '../stylesheet/StarRate.css';
 
 function starRate(props) {
     const rate = props.rate / 5 * 100;
