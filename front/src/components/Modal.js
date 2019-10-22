@@ -1,4 +1,5 @@
 import React, {useEffect} from 'react';
+import ModalStyle from '../stylesheet/Modal.css';
 
 function modalReducer(filter, action) {
     switch (filter) {

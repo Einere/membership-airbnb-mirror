@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import Modal from "./Modal";
+import FilterButtonStyle from '../stylesheet/FilterButton.css';
 
 function FilterButton(props) {
     const [filterType, setFilterType] = useState(props.filterType);

@@ -1,5 +1,6 @@
 import React from 'react';
 import StarRate from './StarRate';
+import RoomCardStyle from '../stylesheet/RoomCard.css';
 
 function RoomCard(props) {
 
