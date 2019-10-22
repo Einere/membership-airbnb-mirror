@@ -87,6 +87,10 @@ project/front
 
 * Github: [@Einere](https://github.com/Einere)
 
+## 🤝 Contributing
+
+Contributions, issues and feature requests are welcome!<br />Feel free to check [issues page](https://github.com/Einere/membership-airbnb/issues).
+
 ## Show your support
 
 Give a ⭐️ if this project helped you!
