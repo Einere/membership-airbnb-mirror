@@ -75,8 +75,8 @@ function ensureAuthenticated(req, res, next) {
 }
 
 server.start({
+    endpoint: '/gql',
     playground: '/playground',
-    endpoint: '/',
     cors: {
         credentials: true,
         origin: whitelist,
