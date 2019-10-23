@@ -1,7 +1,7 @@
-section.show {
+section.modal.show {
     display: block;
 }
 
-section.non-show {
+section.modal.non-show {
     display: none;
 }

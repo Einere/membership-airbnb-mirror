@@ -1,6 +1,6 @@
 import React from 'react';
 import StarRate from './StarRate';
-import '../stylesheet/RoomCard.css';
+import style from '../stylesheet/RoomCard.module.css';
 
 function RoomCard(props) {
 
@@ -10,11 +10,11 @@ function RoomCard(props) {
 
     return (
         <>
-            <section className={"card-container"}>
-                <section className={"thumbnail-container"}>
-                    <img src={props.image} alt={"thumbnail"}/>
+            <section style={style} className={style.CardContainer}>
+                <section className={style.thumbnailContainer}>
+                    <img src={props.image} alt={"thumbnail"} className={style.thumbnail}/>
                 </section>
-                <section className={"room-info-container"}>
+                <section className={style.roomInfoContainer}>
                     <span className={"room-title"}>title : {props.title}</span>
                     <span className={"room-options"}>options : {props.options}</span>
                     <StarRate rate={3.5}/>

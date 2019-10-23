@@ -1,10 +1,10 @@
 import React from 'react';
 import FilterButton from "./FilterButton";
-import '../stylesheet/FilterBar.css';
+import style from '../stylesheet/FilterBar.module.css';
 
 function FilterBar() {
     return (
-        <nav className={"filter-bar"}>
+        <nav style={style} className={style.FilterBar}>
             <FilterButton filterType={"date"}/>
             <FilterButton filterType={"capacity"}/>
             <FilterButton filterType={"price"}/>

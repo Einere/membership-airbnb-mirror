@@ -2,7 +2,7 @@ import React from 'react';
 import {useQuery} from "@apollo/react-hooks";
 import queries from "../graphql/queries";
 import RoomCard from '../components/RoomCard';
-import '../stylesheet/RoomCardList.css';
+import style from '../stylesheet/RoomCardList.module.css';
 
 function RoomCardList(props) {
     const {loading, error, data} = useQuery(queries.getRooms);
@@ -16,7 +16,7 @@ function RoomCardList(props) {
 
     return (
         <>
-            <ul className={"card-list"}>
+            <ul style={style} className={style.RoomCardList}>
                 {result}
             </ul>
         </>

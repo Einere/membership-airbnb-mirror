@@ -1,5 +1,5 @@
 import React from 'react';
-import '../stylesheet/StarRate.css';
+import styles from '../stylesheet/StarRate.module.css';
 
 function starRate(props) {
     const rate = props.rate / 5 * 100;
@@ -8,7 +8,7 @@ function starRate(props) {
     };
 
     return (
-        <div style={style} className={"star-rate"}>★★★★★</div>
+        <div style={style} className={styles.StarRate}>★★★★★</div>
     )
 }
 
