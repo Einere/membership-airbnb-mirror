@@ -1,6 +1,6 @@
 import {db} from "../database/index";
 
-const {gte, lte, ne, in: opIn, notIn, and, or} = db.Sequelize.Op;
+const {gte, lte, ne, in: opIn, notIn, and, or, between} = db.Sequelize.Op;
 
 const resolvers = {
         Query: {
@@ -45,11 +45,21 @@ const resolvers = {
                     capacity: {[gte]: capacity}
                 }
             }),
-            getAvailableRoomsByPrice: (_, {price}) => db.Room.findAll({
-                where: {
-                    price: {[lte]: price}
-                }
-            })
+            getAvailableRoomsByPrice: async (_, {minPrice, maxPrice}) => {
+                const rows = await db.Reservation.findAll({
+                    attributes: ['id']
+                });
+
+                return db.Room.findAll({
+                    where: {
+                        [and]: [
+                            {id: {[notIn]: rows.map(row => row.id)}},
+                            {price: {[between]: [minPrice, maxPrice]}}
+                        ]
+
+                    }
+                })
+            }
         },
         Mutation: {
             createUser: (_, {facebookId, displayName}) => db.User.create({

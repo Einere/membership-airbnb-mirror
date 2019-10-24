@@ -37,7 +37,7 @@ type Query {
     getReservationById(id: Int!): Reservation,
     getAvailableRoomsByDays(checkIn: DateTime!, checkOut: DateTime!): [Room],
     getAvailableRoomsByCapacity(capacity: Int!): [Room],
-    getAvailableRoomsByPrice(price: Int!): [Room]
+    getAvailableRoomsByPrice(minPrice: Int!, maxPrice: Int!): [Room]
 }
 
 type Mutation {
