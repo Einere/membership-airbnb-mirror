@@ -33,6 +33,18 @@ const query = {
                 options
             }
         }
+    `,
+    getAvailableRoomsByPrice: gql`
+        query getAvailableRoomsByPrice($minPrice: Int!, $maxPrice: Int!){
+            getAvailableRoomsByPrice(minPrice: $minPrice, maxPrice: $maxPrice){
+                id,
+                image,
+                title,
+                capacity,
+                showerRoom,
+                options
+            }
+        }
     `
 
 };
