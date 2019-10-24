@@ -1,23 +1,26 @@
-const initialDate = {checkIn: undefined, checkOut: undefined};
+function dateFilterReducerWrapper(queryDispatch) {
+    const initialDate = {checkIn: undefined, checkOut: undefined};
 
-function dateFilterReducer(state, {type, payload}) {
-    console.log('dateFilterReducer', type, payload);
-    switch (type) {
-        case 'init': {
-            return initialDate;
+    return {
+        initialDate,
+        dateFilterReducer(state, {type, payload}) {
+            console.log('dateFilterReducer', type, payload);
+            switch (type) {
+                case 'init': {
+                    return initialDate;
+                }
+                case 'query': {
+                    queryDispatch({type: 'update', payload: state});
+                    return initialDate;
+                }
+                case 'date': {
+                    return {checkIn: payload.checkIn, checkOut: payload.checkOut};
+                }
+                default:
+                    break;
+            }
         }
-        case 'query': {
-            return initialDate;
-        }
-        case 'checkIn': {
-            return {checkIn: payload, checkOut: state.checkOut};
-        }
-        case 'checkOut' : {
-            return {checkIn: payload, checkOut: state.checkOut};
-        }
-        default:
-            break;
-    }
+    };
 }
 
-export {dateFilterReducer, initialDate};
+export default dateFilterReducerWrapper;

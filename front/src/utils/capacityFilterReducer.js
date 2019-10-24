@@ -1,5 +1,6 @@
 function capacityFilterReducerWrapper(queryDispatch) {
     const initialCapacity = {adult: 0, teenager: 0, toddler: 0};
+
     return {
         initialCapacity,
         capacityFilterReducer(state, {type, payload}) {
@@ -9,7 +10,7 @@ function capacityFilterReducerWrapper(queryDispatch) {
                     return initialCapacity;
                 }
                 case 'query': {
-                    queryDispatch({type: 'capacity', payload: state});
+                    queryDispatch({type: 'update', payload: state});
                     return initialCapacity;
                 }
                 case 'adult': {

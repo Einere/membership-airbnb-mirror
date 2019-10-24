@@ -1,5 +1,6 @@
 function priceFilterReducerWrapper(queryDispatch) {
     const initialPrice = {minPrice: 0, maxPrice: 100000};
+
     return {
         initialPrice,
         priceFilterReducer(state, {type, payload}) {
@@ -9,6 +10,7 @@ function priceFilterReducerWrapper(queryDispatch) {
                     return initialPrice;
                 }
                 case 'query': {
+                    queryDispatch({type: 'update', payload: state});
                     return initialPrice;
                 }
                 case 'price': {
