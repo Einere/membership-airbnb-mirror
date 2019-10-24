@@ -22,6 +22,18 @@ const query = {
             }
         }
     `,
+    getAvailableRoomsByDate: gql`
+        query getAvailableRoomsByDate($checkIn: Date!, $checkOut: Date!){
+            getAvailableRoomsByDate(checkIn: $checkIn, checkOut: $checkOut){
+                id,
+                image,
+                title,
+                capacity,
+                showerRoom,
+                options
+            }
+        }
+    `,
     getAvailableRoomsByCapacity: gql`
         query getAvailableRoomsByCapacity($capacity: Int!){
             getAvailableRoomsByCapacity(capacity: $capacity) {
