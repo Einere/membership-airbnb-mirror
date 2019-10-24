@@ -21,6 +21,18 @@ const query = {
                 options
             }
         }
+    `,
+    getAvailableRoomsByCapacity: gql`
+        query getAvailableRoomsByCapacity($capacity: Int!){
+            getAvailableRoomsByCapacity(capacity: $capacity) {
+                id,
+                image,
+                title,
+                capacity,
+                showerRoom,
+                options
+            }
+        }
     `
 
 };
