@@ -21,12 +21,12 @@ function FilterButton(props) {
         setShow(false);
         // 쿼리 수행
         client.query({
-            query: getProperQuery(),
-            variables: getProperQueryParameter()
+            query: getProperQuery(filterType),
+            variables: getProperQueryParameter(filterType, state)
         })
             .then(result => {
                 // 쿼리 수행 후 queryDispatch를 이용해 queryState를 업데이트
-                queryDispatch({type: 'update', payload: getProperQueryResult(result)});
+                queryDispatch({type: 'update', payload: getProperQueryResult(filterType, result)});
             })
             .catch(error => {
                 console.error(error);
