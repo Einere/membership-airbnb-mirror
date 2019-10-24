@@ -1,8 +1,8 @@
 import React, {useContext, useState} from 'react';
 import style from '../stylesheet/FilterButton.module.css';
 import {Button, Modal} from 'react-bootstrap';
-import {FilterContext} from "./FilterContext";
-import {QueryContext} from "./QueryContext";
+import {FilterContext} from "./context/FilterContext";
+import {QueryContext} from "./context/QueryContext";
 import client from "../apollo/apolloClient";
 import {getProperQuery, getProperQueryParameter, getProperQueryResult} from "../utils/queryUtils";
 

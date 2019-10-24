@@ -62,6 +62,7 @@
 ### Frontend
 - react
 - apollo
+- bootstrap
 
 ## Install
 

@@ -1,13 +1,13 @@
 import React, {useContext, useReducer} from 'react';
 import FilterButton from "./FilterButton";
 import style from '../stylesheet/FilterBar.module.css';
-import {FilterContext} from "./FilterContext";
-import {QueryContext} from "./QueryContext";
+import {FilterContext} from "./context/FilterContext";
+import {QueryContext} from "./context/QueryContext";
 import {dateFilterReducer, initialDate} from '../utils/dateFilterReducer';
 import capacityFilterReducerWraper from "../utils/capacityFilterReducer";
 import {initialPrice, priceFilterReducer} from "../utils/priceFilterReducer";
-import Calendar from "./Calender";
-import CapacityFilter from "./CapacityFilter";
+import DateFilter from "./filter/DateFilter";
+import CapacityFilter from "./filter/CapacityFilter";
 
 
 function FilterBar() {
@@ -22,7 +22,7 @@ function FilterBar() {
     return (
         <nav style={style} className={style.FilterBar}>
             <FilterContext.Provider value={{state: dateFilterState, dispatch: dateFilterDispatch}}>
-                <FilterButton filtertype={"date"}><Calendar/></FilterButton>
+                <FilterButton filtertype={"date"}><DateFilter/></FilterButton>
             </FilterContext.Provider>
             <FilterContext.Provider value={{state: capacityFilterState, dispatch: capacityFilterDispatch}}>
                 <FilterButton filtertype={"capacity"}><CapacityFilter/></FilterButton>
