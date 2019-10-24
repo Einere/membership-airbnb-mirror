@@ -8,9 +8,6 @@ function queryReducer(state, {type, payload}) {
         case 'init': {
             return initialQuery;
         }
-        case 'capacity': {
-            return initialQuery;
-        }
         case 'update': {
             return payload;
         }
