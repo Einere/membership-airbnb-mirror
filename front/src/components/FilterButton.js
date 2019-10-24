@@ -1,20 +1,58 @@
-import React, {useState} from 'react';
-import Modal from "./Modal";
+import React, {useContext, useState} from 'react';
 import style from '../stylesheet/FilterButton.module.css';
+import {Button, Modal} from 'react-bootstrap';
+import {FilterContext} from "./FilterContext";
+import {QueryContext} from "./QueryContext";
+import client from "../apollo/apolloClient";
+import {getProperQuery, getProperQueryParameter, getProperQueryResult} from "../utils/queryUtils";
 
 function FilterButton(props) {
-    const [filterType, setFilterType] = useState(props.filterType);
-    const [showModal, setShowModal] = useState(false);
+    // state
+    const {state, dispatch} = useContext(FilterContext);
+    const {queryState, queryDispatch} = useContext(QueryContext);
+    const [filterType, setFilterType] = useState(props.filtertype);
+    const [show, setShow] = useState(false);
 
-    function triggerFilterModal() {
-        setShowModal(!showModal);
-    }
+    const deleteFilterValue = () => {
+        dispatch({type: 'init', payload: 'hello'});
+    };
+
+    const triggerQuery = () => {
+        setShow(false);
+        // 쿼리 수행
+        client.query({
+            query: getProperQuery(),
+            variables: getProperQueryParameter()
+        })
+            .then(result => {
+                // 쿼리 수행 후 queryDispatch를 이용해 queryState를 업데이트
+                queryDispatch({type: 'update', payload: getProperQueryResult(result)});
+            })
+            .catch(error => {
+                console.error(error);
+                queryDispatch({type: 'init'});
+            })
+    };
+    const showModal = () => setShow(true);
+    const noShowModal = () => setShow(false);
 
     return (
         <>
-            <button style={style} className={style.FilterButton} onClick={triggerFilterModal}>{filterType}</button>
-            <Modal show={showModal}>
-                /* FilterBar로부터 받은 filter type에 따라 적절한 filter를 넣는다 */
+            <button style={style} className={style.FilterButton} onClick={showModal}>{filterType}</button>
+
+            <Modal show={show} onHide={triggerQuery} animation={true} size={'lg'}>
+                <Modal.Header closeButton>
+                    <Modal.Title>{filterType}</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>{props.children}</Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={deleteFilterValue}>
+                        delete
+                    </Button>
+                    <Button variant="primary" onClick={triggerQuery}>
+                        save
+                    </Button>
+                </Modal.Footer>
             </Modal>
         </>
     );
