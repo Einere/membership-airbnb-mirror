@@ -1,30 +1,40 @@
 import React from "react";
-import {DateRangePicker} from "react-dates";
+import moment from 'moment'
+import {DayPickerRangeController, isInclusivelyBeforeDay} from "react-dates";
 import 'react-dates/lib/css/_datepicker.css';
 import 'react-dates/initialize';
 
-class Calendar extends React.Component {
+
+export default class Calendar extends React.Component {
     state = {
-        focusedInput: null,
         startDate: null,
-        endDate: null
+        endDate: null,
+
+        // 포커싱 될 기준을 start로 할지 end 로 할지 설정. 직접 바꿔보면 앎
+        // null 로 바꾸면 망함
+        focusedInput: "startDate",
     };
 
     render() {
         return (
-            <DateRangePicker
-                startDate={this.state.startDate} // momentPropTypes.momentObj or null,
-                startDateId="your_unique_start_date_id" // PropTypes.string.isRequired,
-                endDate={this.state.endDate} // momentPropTypes.momentObj or null,
-                endDateId="your_unique_end_date_id" // PropTypes.string.isRequired,
+            <DayPickerRangeController
+                startDate={this.state.startDate}
+                endDate={this.state.endDate}
+                // 모름
                 onDatesChange={({startDate, endDate}) =>
                     this.setState({startDate, endDate})
-                } // PropTypes.func.isRequired,
-                focusedInput={this.state.focusedInput} // PropTypes.oneOf([START_DATE, END_DATE]) or null,
-                onFocusChange={focusedInput => this.setState({focusedInput})} // PropTypes.func.isRequired,
+                }
+                // 모름
+                focusedInput={this.state.focusedInput}
+                // 모름
+                onFocusChange={focusedInput => {
+                    this.setState({focusedInput: focusedInput || "startDate"});
+                }}
+                // 지난 날짜 disable
+                isOutsideRange={day => isInclusivelyBeforeDay(day, moment().add(-1, 'days'))}
+                // 2달 씩 표시
+                numberOfMonths={2}
             />
         );
     }
 }
-
-export default Calendar;
