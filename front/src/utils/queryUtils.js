@@ -7,7 +7,7 @@ function getProperQuery(filterType) {
         case 'capacity':
             return queries.getAvailableRoomsByCapacity;
         case 'price':
-            return;
+            return queries.getAvailableRoomsByPrice;
     }
 }
 
@@ -18,7 +18,7 @@ function getProperQueryParameter(filterType, filterState) {
         case 'capacity':
             return {capacity: filterState.adult + filterState.teenager};
         case 'price':
-            return;
+            return {minPrice: filterState.minPrice, maxPrice: filterState.maxPrice};
     }
 }
 
@@ -29,7 +29,7 @@ function getProperQueryResult(filterType, result) {
         case 'capacity':
             return result.data.getAvailableRoomsByCapacity;
         case 'price':
-            return;
+            return result.data.getAvailableRoomsByPrice;
     }
 }
 
