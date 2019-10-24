@@ -35,7 +35,7 @@ type Query {
     getRoomById(id: Int!): Room,
     getReservations: [Reservation],
     getReservationById(id: Int!): Reservation,
-    getAvailableRoomsByDays(checkIn: DateTime!, checkOut: DateTime!): [Room],
+    getAvailableRoomsByDate(checkIn: DateTime!, checkOut: DateTime!): [Room],
     getAvailableRoomsByCapacity(capacity: Int!): [Room],
     getAvailableRoomsByPrice(minPrice: Int!, maxPrice: Int!): [Room]
 }
