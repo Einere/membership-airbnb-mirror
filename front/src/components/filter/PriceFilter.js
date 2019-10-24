@@ -32,6 +32,8 @@ function PriceFilter(props) {
                 value={[state.minPrice, state.maxPrice]}
                 min={initPrice[0]}
                 max={initPrice[1]}
+                marks={true}
+                step={1000}
                 onChange={handleChange}
                 valueLabelDisplay="auto"
                 aria-labelledby="range-slider"
