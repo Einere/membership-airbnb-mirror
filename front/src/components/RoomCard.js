@@ -15,7 +15,7 @@ function RoomCard(props) {
                     <img src={props.image} alt={"thumbnail"} className={style.thumbnail}/>
                 </section>
                 <section className={style.roomInfoContainer}>
-                    <span className={"room-title"}>title : {props.title}</span>
+                    <h3 className={"room-title"}>{props.title}</h3>
                     <span className={"room-options"}>options : {props.options}</span>
                     <StarRate rate={3.5}/>
                     <button onClick={book}>book</button>
