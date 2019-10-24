@@ -23,13 +23,16 @@ function FilterBar() {
 
     return (
         <nav style={style} className={style.FilterBar}>
-            <FilterContext.Provider value={{state: dateFilterState, dispatch: dateFilterDispatch}}>
+            <FilterContext.Provider
+                value={{state: dateFilterState, dispatch: dateFilterDispatch, initData: initialDate}}>
                 <FilterButton filtertype={"date"}><DateFilter/></FilterButton>
             </FilterContext.Provider>
-            <FilterContext.Provider value={{state: capacityFilterState, dispatch: capacityFilterDispatch}}>
+            <FilterContext.Provider
+                value={{state: capacityFilterState, dispatch: capacityFilterDispatch, initData: initialCapacity}}>
                 <FilterButton filtertype={"capacity"}><CapacityFilter/></FilterButton>
             </FilterContext.Provider>
-            <FilterContext.Provider value={{state: priceFilterState, dispatch: priceFilterDispatch}}>
+            <FilterContext.Provider
+                value={{state: priceFilterState, dispatch: priceFilterDispatch, initData: initialPrice}}>
                 <FilterButton filtertype={"price"}><PriceFilter/></FilterButton>
             </FilterContext.Provider>
         </nav>
