@@ -3,7 +3,7 @@ import queries from "../graphql/queries";
 function getProperQuery(filterType) {
     switch (filterType) {
         case 'date':
-            return;
+            return queries.getAvailableRoomsByDate;
         case 'capacity':
             return queries.getAvailableRoomsByCapacity;
         case 'price':
@@ -14,7 +14,10 @@ function getProperQuery(filterType) {
 function getProperQueryParameter(filterType, filterState) {
     switch (filterType) {
         case 'date':
-            return;
+            return {
+                checkIn: filterState.checkIn.format('YYYY[-]MM[-]DD'),
+                checkOut: filterState.checkOut.format('YYYY[-]MM[-]DD')
+            };
         case 'capacity':
             return {capacity: filterState.adult + filterState.teenager};
         case 'price':
@@ -25,7 +28,7 @@ function getProperQueryParameter(filterType, filterState) {
 function getProperQueryResult(filterType, result) {
     switch (filterType) {
         case 'date':
-            return;
+            return result.data.getAvailableRoomsByDate;
         case 'capacity':
             return result.data.getAvailableRoomsByCapacity;
         case 'price':
