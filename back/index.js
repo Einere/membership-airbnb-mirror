@@ -43,7 +43,7 @@ server.express.get('/auth/facebook/callback',
     }));
 
 server.express.get('/login_success', ensureAuthenticated, function (req, res) {
-    const token = jwt.sign({
+    req.user.token = jwt.sign({
             id: req.user.id,
             displayName: req.user.displayName
         },
@@ -53,11 +53,10 @@ server.express.get('/login_success', ensureAuthenticated, function (req, res) {
             issuer: 'einere',
             subject: 'userInfo'
         });
-    req.user.token = token;
-    res.send(token);
+    res.redirect(200, 'http://localhost:3000/');
 });
 server.express.get('/login_fail', ensureAuthenticated, function (req, res) {
-    res.redirect('/');
+    res.redirect(401, 'http://localhost:3000/');
 });
 
 server.express.get('/logout', function (req, res) {
