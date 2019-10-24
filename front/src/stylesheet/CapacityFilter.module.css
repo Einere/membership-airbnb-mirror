@@ -1,0 +1,14 @@
+.CapacityFilter {
+
+}
+
+.itemContainer {
+    display: flex;
+    justify-content: space-between;
+}
+
+.controllerContainer {
+    display: flex;
+    width: 10%;
+    justify-content: space-around;
+}
