@@ -1,4 +1,4 @@
-function capacityFilterReducerWraper(queryDispatch) {
+function capacityFilterReducerWrapper(queryDispatch) {
     const initialCapacity = {adult: 0, teenager: 0, toddler: 0};
     return {
         initialCapacity,
@@ -32,4 +32,4 @@ function capacityFilterReducerWraper(queryDispatch) {
 }
 
 
-export default capacityFilterReducerWraper;
+export default capacityFilterReducerWrapper;
