@@ -12,7 +12,22 @@
 ## Structure
 ### Frontend
 ```
-
+./
+├── public/                   # 정적 문서 
+└── src/                      # 소스 파일
+    ├── apollo/               # 아폴로 설정 파
+    ├── asset/                # 어셋 파일 
+    ├── components/           # 컴포넌트
+    |   ├── context/          # 컨텍스트 컴포넌트     
+    |   └── filter/           # 필터 컴포넌트     
+    ├── graphql/              # gql 관련 파일
+    ├── routes/               # 라우트 컴포넌
+    ├── stylesheet/           # 스타일 시트
+    ├── test/                 # 테스트 파일
+    ├── utils/                # 커스텀 유틸리티 파일
+    ├── App.js                # 최상위 컴포넌트
+    ├── index.js              # 엔트리 포인트
+    └── serviceWorker.js      # 뭔지 모르겠음 
 ```
 
 ### Backend
@@ -64,6 +79,7 @@
 - apollo
 - bootstrap
 - material ui
+- fontawesome
 
 ## Install
 
@@ -80,7 +96,7 @@ yarn start
 
 project/front
 ```sh
-
+yarn start
 ```
 
 ## Author
